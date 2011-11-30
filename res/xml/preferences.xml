@@ -13,9 +13,13 @@
 			android:summary="@string/pref_username_summary"/>
 		<EditTextPreference
 			android:key="password"
-			android:password="true"
 			android:title="@string/pref_password"
-			android:summary="@string/pref_password_summary"/>
+			android:summary="@string/pref_password_summary" android:password="true"/>
+		<EditTextPreference
+			android:key="ssid"
+			android:title="@string/pref_ssid"
+			android:summary="@string/pref_ssid_summary"
+			android:defaultValue="Guest"/>
 		<PreferenceScreen
 			android:title="@string/pref_error_notify_title"
 			android:key="error_notify">
@@ -50,6 +54,7 @@
 			android:entries="@array/languages"
 			android:entryValues="@array/languages_values"
 			android:defaultValue="default"/>
+		
 	</PreferenceCategory>
 	
 	<PreferenceCategory android:title="@string/pref_about">

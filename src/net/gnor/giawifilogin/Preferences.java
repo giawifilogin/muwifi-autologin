@@ -34,6 +34,7 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
 	static final String KEY_VERSION = "version";
 	static final String KEY_WEBSITE = "website";
 	static final String KEY_AUTHOR = "author";
+	static final String KEY_SSID   = "ssid";
 	
 	static final String LANGUAGE_DEFAULT = "default";
 	static final String MARKET_PREFIX = "market://details?id=";
@@ -53,6 +54,7 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
         updateErrorNotificationSummary();
         updateToastNotificationSummary();
         updateLanguageSummary();
+        updateSSIDSummary();
         
         // Set version number
 		String versionSummary = String.format(getString(R.string.pref_version_summary), Utils.getVersionName(this));
@@ -144,6 +146,9 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
 			startActivity(intent);
 			overridePendingTransition(0, 0);
 		}
+		else if (key.equals(KEY_SSID)) {
+			updateSSIDSummary();
+		}
 	}
 	
 	// Enable / disable the BroadcastReceiver
@@ -152,6 +157,15 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
 		Utils.setEnableBroadcastReceiver(this, enabled);
 	}
 	
+	private void updateSSIDSummary() {
+        String ssid = getPreferenceManager().getSharedPreferences().getString(KEY_SSID, "");
+        if (ssid.length() != 0) {
+        	findPreference(KEY_SSID).setSummary(ssid);
+        } else {
+        	findPreference(KEY_SSID).setSummary(R.string.pref_ssid_summary);
+        }
+
+	}
 	private void updateUsernameSummary() {
 		// Set username as summary if set
         String username = getPreferenceManager().getSharedPreferences().getString(KEY_USERNAME, "");

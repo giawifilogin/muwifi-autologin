@@ -62,7 +62,9 @@ public class MuWifiLogin extends IntentService {
 					loginClient.login();
 					
 					if (mPrefs.getBoolean(Preferences.KEY_TOAST_NOTIFY_SUCCESS, true)) {
-						createToastNotification(R.string.login_successful, Toast.LENGTH_SHORT);
+						createToastNotification(String.format(getString(R.string.login_successful),
+															  this.mPrefs.getString(Preferences.KEY_SSID, "")),
+								Toast.LENGTH_SHORT);
 					}
 					
 					Log.v(TAG, "Login successful");
@@ -124,8 +126,13 @@ public class MuWifiLogin extends IntentService {
 			return;
 		}
 		
-		Notification notification = new Notification(R.drawable.ic_stat_notify_key, getString(R.string.ticker_login_error), System.currentTimeMillis());
-		notification.setLatestEventInfo(this, getString(R.string.notify_login_error_title), errorText, contentIntent);
+		Notification notification = new Notification(R.drawable.ic_stat_notify_key,
+							     String.format(getString(R.string.ticker_login_error),
+									   mPrefs.getString(Preferences.KEY_SSID, "")),
+							     System.currentTimeMillis());
+		notification.setLatestEventInfo(this, String.format(getString(R.string.notify_login_error_title),
+								    mPrefs.getString(Preferences.KEY_SSID, "")),
+						errorText, contentIntent);
 		notification.flags = Notification.FLAG_AUTO_CANCEL;
 		
 		if (mPrefs.getBoolean(Preferences.KEY_ERROR_NOTIFY_SOUND, false)) {
@@ -142,6 +149,14 @@ public class MuWifiLogin extends IntentService {
 	}
 	
 	private void createToastNotification(final int message, final int length) {
+		mHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				Toast.makeText(MuWifiLogin.this, message, length).show();
+			}
+		});
+	}
+	private void createToastNotification(final String message, final int length) {
 		mHandler.post(new Runnable() {
 			@Override
 			public void run() {

@@ -3,6 +3,8 @@
 	<string name="app_name">GIA-WiFi Autologin</string>
 	<string name="pref_login_now">Login Now!</string>
 	<string name="pref_preferences">Preferences</string>
+	<string name="pref_ssid">SSID</string>
+	<string name="pref_ssid_summary">Click to set SSID</string>
 	<string name="pref_username">Username</string>
 	<string name="pref_username_summary">Click to set username</string>
 	<string name="pref_password">Password</string>
@@ -28,12 +30,12 @@
 	<string name="pref_author_summary"></string>
 	<string name="wifi_disabled">WiFi needs to be enabled to use autologin.</string>
 	<string name="no_login_required">No login required.</string>
-	<string name="login_successful">Automatic login to GIA-WiFi successful.</string>
-	<string name="ticker_login_error">Unable to login to GIA-WiFi.</string>
+	<string name="login_successful">Auto login to Wifi "%s" successful.</string>
+	<string name="ticker_login_error">Unable to login to "%s".</string>
 	<string name="notify_login_ongoing_title">GIA-WiFi Autologin</string>
-	<string name="notify_login_ongoing_text_determine_requirement">Determining if login is required...</string>
+	<string name="notify_login_ongoing_text_determine_requirement">Detecting if login is required...</string>
 	<string name="notify_login_ongoing_text_logging_in">Logging in...</string>
-	<string name="notify_login_error_title">Unable to login to GIA-WiFi</string>
+	<string name="notify_login_error_title">Unable to login to "%s"</string>
 	<string name="notify_login_error_text">Click to retry.</string>
 	<string name="notify_login_error_invalid_credentials_text">Invalid username or password.</string>
 </resources>

@@ -31,9 +31,10 @@ public class NetworkStateChanged extends BroadcastReceiver {
 		}
 		
 		// Check SSID
+		String ssid = prefs.getString(Preferences.KEY_SSID, "");
 		WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 		try {
-			if (!wifi.getConnectionInfo().getSSID().equalsIgnoreCase(SSID)) {
+			if (!wifi.getConnectionInfo().getSSID().equalsIgnoreCase(ssid)) {
 				return;
 			}
 		}
