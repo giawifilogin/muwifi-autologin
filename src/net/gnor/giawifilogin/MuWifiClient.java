@@ -132,16 +132,21 @@ public class MuWifiClient {
 			
             // output parameters to request body
             StringBuilder sb = new StringBuilder();
-            String value;
+            String value, logstr;
             for(Map.Entry<String, String> entry : form.parameters.entrySet())
             {
-            	if (entry.getKey().equals(FORM_USERNAME))
+            	if (entry.getKey().equals(FORM_USERNAME)) {
             		value = mUsername;
-            	else if (entry.getKey().equals(FORM_PASSWORD))
+            		logstr = value;
+            	}
+            	else if (entry.getKey().equals(FORM_PASSWORD)) {
             		value = mPassword;
-            	else
+            		logstr = "XXXXXXXXXXXXXXXXXX";
+            	}else{
             		value = entry.getValue();
-            	Log.d(TAG, "entry: " + entry.getKey() + " : " + value);
+            		logstr = value;
+            	}
+            	Log.d(TAG, "entry: " + entry.getKey() + " : " + logstr);
             	formparams.add(new BasicNameValuePair(entry.getKey(), value));
             }
     		UrlEncodedFormEntity entity = new UrlEncodedFormEntity(formparams, "UTF-8");
