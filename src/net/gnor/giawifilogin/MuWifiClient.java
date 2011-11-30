@@ -48,8 +48,8 @@ public class MuWifiClient {
 	static final String FORM_PASSWORD = "password";
 	static final String LOGIN_URL = "http://apc.aptilo.com/cgi-bin/auto?url=http://www.google.com/";
 	static final String UA = "Mozilla/5.0 (Linux; U; Android 0.5; en-us) AppleWebKit/522+ (KHTML, like Gecko) Safari/419.3";
-	static final int CONNECTION_TIMEOUT = 2000;
-	static final int SOCKET_TIMEOUT = 2000;
+	static final int CONNECTION_TIMEOUT = 10000;
+	static final int SOCKET_TIMEOUT = 10000;
 	static final int RETRY_COUNT = 2;
 	
 	private String mUsername;
@@ -131,7 +131,6 @@ public class MuWifiClient {
 			List<NameValuePair> formparams = new ArrayList<NameValuePair>();
 			
             // output parameters to request body
-            StringBuilder sb = new StringBuilder();
             String value, logstr;
             for(Map.Entry<String, String> entry : form.parameters.entrySet())
             {
@@ -150,6 +149,7 @@ public class MuWifiClient {
             	formparams.add(new BasicNameValuePair(entry.getKey(), value));
             }
     		UrlEncodedFormEntity entity = new UrlEncodedFormEntity(formparams, "UTF-8");
+    		Log.d(TAG, "form url: " + form.actionUrl.toString());
     		httppost = new HttpPost(form.actionUrl.toString());
     		httppost.setEntity(entity);
         } catch (InvalidFormException e) {
