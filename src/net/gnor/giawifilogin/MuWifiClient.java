@@ -139,6 +139,8 @@ public class MuWifiClient {
 //        } catch (Exception e) {
 //        }
         HttpClient httpClient = this.getNewHttpClient();
+        HttpProtocolParams.setUserAgent(httpClient.getParams(),
+        	    "Mozilla/5.0 (Linux; U; Android 0.5; en-us) AppleWebKit/522+ (KHTML, like Gecko) Safari/419.3");
         // Example send http request
         String url = "http://apc.aptilo.com/cgi-bin/auto?url=http://www.google.com/";
         HttpGet req = new HttpGet(url);
