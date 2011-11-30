@@ -46,7 +46,8 @@ public class MuWifiClient {
 	
 	static final String FORM_USERNAME = "username";
 	static final String FORM_PASSWORD = "password";
-	static final String FORM_URL = "https://securelogin.arubanetworks.com/auth/index.html/u";
+	static final String LOGIN_URL = "http://apc.aptilo.com/cgi-bin/auto?url=http://www.google.com/";
+	static final String UA = "Mozilla/5.0 (Linux; U; Android 0.5; en-us) AppleWebKit/522+ (KHTML, like Gecko) Safari/419.3";
 	static final int CONNECTION_TIMEOUT = 2000;
 	static final int SOCKET_TIMEOUT = 2000;
 	static final int RETRY_COUNT = 2;
@@ -54,16 +55,25 @@ public class MuWifiClient {
 	private String mUsername;
 	private String mPassword;
 	private DefaultHttpClient mHttpClient;
+	private DefaultHttpClient mHttpClient2;
 	
 	public MuWifiClient(String username, String password) {
 		mUsername = username;
 		mPassword = password;
 		
 		mHttpClient = new DefaultHttpClient();
+		mHttpClient2 = this.getNewHttpClient();
+		
 		HttpParams params = mHttpClient.getParams();
 		HttpConnectionParams.setConnectionTimeout(params, CONNECTION_TIMEOUT);
 		HttpConnectionParams.setSoTimeout(params, SOCKET_TIMEOUT);
-		
+        HttpProtocolParams.setUserAgent(params, UA);
+
+		params = mHttpClient2.getParams();
+		HttpConnectionParams.setConnectionTimeout(params, CONNECTION_TIMEOUT);
+		HttpConnectionParams.setSoTimeout(params, SOCKET_TIMEOUT);
+        HttpProtocolParams.setUserAgent(params, UA);
+        
 		// Also retry POST requests (normally not retried because it is not regarded idempotent)
 		mHttpClient.setHttpRequestRetryHandler(new HttpRequestRetryHandler() {
 			@Override
@@ -103,63 +113,21 @@ public class MuWifiClient {
 	}
 	
 	public void login() throws IOException, LoginException {
-		
-//		HostnameVerifier hostnameVerifier = org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER;
-//
-//        DefaultHttpClient client = new DefaultHttpClient();
-//
-//        SchemeRegistry registry = new SchemeRegistry();
-//        SSLSocketFactory socketFactory = SSLSocketFactory.getSocketFactory();
-//        socketFactory.setHostnameVerifier((X509HostnameVerifier) hostnameVerifier);
-//        registry.register(new Scheme("https", socketFactory, 443));
-//        SingleClientConnManager mgr = new SingleClientConnManager(client.getParams(), registry);
-//        DefaultHttpClient httpClient = new DefaultHttpClient(mgr, client.getParams());
-//
-//        // Set verifier     
-//        HttpsURLConnection.setDefaultHostnameVerifier(hostnameVerifier);
-//        TrustManager[] trustAllCerts = new TrustManager[]{
-//        		new X509TrustManager() {
-//        			public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-//        				return null;
-//        			}
-//        			public void checkClientTrusted(
-//        					java.security.cert.X509Certificate[] certs, String authType) {
-//        			}
-//        			public void checkServerTrusted(
-//        					java.security.cert.X509Certificate[] certs, String authType) {
-//        			}
-//        		}
-//        };
-//
-//        // Install the all-trusting trust manager
-//        try {
-//        	SSLContext sc = SSLContext.getInstance("SSL");
-//        	sc.init(null, trustAllCerts, new java.security.SecureRandom());
-//        	HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
-//        } catch (Exception e) {
-//        }
-        HttpClient httpClient = this.getNewHttpClient();
-        HttpProtocolParams.setUserAgent(httpClient.getParams(),
-        	    "Mozilla/5.0 (Linux; U; Android 0.5; en-us) AppleWebKit/522+ (KHTML, like Gecko) Safari/419.3");
+
+		HttpClient httpClient = this.mHttpClient2;
         // Example send http request
-        String url = "http://apc.aptilo.com/cgi-bin/auto?url=http://www.google.com/";
+        String url = LOGIN_URL;
         HttpGet req = new HttpGet(url);
         HttpResponse response = httpClient.execute(req);
-        BufferedReader in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-        String line;
-        StringBuilder html = new StringBuilder();
-        while((line = in.readLine()) != null)
-        {
-            html.append(line);
-        }
-        in.close();
+		String html = EntityUtils.toString(response.getEntity());
+
         Header header = response.getLastHeader("Location");
         HttpPost httppost;
         if (header != null) {
         	url = header.getValue();
         }
         try {
-			HtmlForm form = new HtmlForm (new URL(url), html.toString());
+			HtmlForm form = new HtmlForm (new URL(url), html);
 			List<NameValuePair> formparams = new ArrayList<NameValuePair>();
 			
             // output parameters to request body
@@ -191,7 +159,7 @@ public class MuWifiClient {
 			throw new LoginException(strRes);
 		}
 	}
-	public HttpClient getNewHttpClient() {
+	public DefaultHttpClient getNewHttpClient() {
 	    try {
 	        KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
 	        trustStore.load(null, null);
