@@ -1,4 +1,4 @@
-package org.dyndns.pawitp.muwifiautologin;
+package net.gnor.giawifilogin;
 
 public class LoginException extends Exception {
 

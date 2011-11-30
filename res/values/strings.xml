@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>   
-	<string name="app_name">MU-WiFi Autologin</string>
+	<string name="app_name">GIA-WiFi Autologin</string>
 	<string name="pref_login_now">Login Now!</string>
 	<string name="pref_preferences">Preferences</string>
 	<string name="pref_username">Username</string>
 	<string name="pref_username_summary">Click to set username</string>
 	<string name="pref_password">Password</string>
 	<string name="pref_password_summary">Click to change password</string>
-	<string name="pref_enabled">Enabled</string>
-	<string name="pref_enabled_summary">Enable autologin to MU-WiFi</string>
+	<string name="pref_enabled">Auto Login</string>
+	<string name="pref_enabled_summary">no background resources required</string>
 	<string name="pref_error_notify_title">Error Notification</string>
 	<string name="pref_error_notify_summary">How you are notified of errors</string>
 	<string name="pref_error_notify_sound">Sound</string>
@@ -25,15 +25,15 @@
 	<string name="pref_website">Visit Website</string>
 	<string name="pref_website_summary">Usage and troubleshooting</string>
 	<string name="pref_author">Contact Author</string>
-	<string name="pref_author_summary">pawitp @ MUICT9</string>
+	<string name="pref_author_summary"></string>
 	<string name="wifi_disabled">WiFi needs to be enabled to use autologin.</string>
 	<string name="no_login_required">No login required.</string>
-	<string name="login_successful">Automatic login to MU-WiFi successful.</string>
-	<string name="ticker_login_error">Unable to login to MU-WiFi.</string>
-	<string name="notify_login_ongoing_title">MU-WiFi Autologin</string>
+	<string name="login_successful">Automatic login to GIA-WiFi successful.</string>
+	<string name="ticker_login_error">Unable to login to GIA-WiFi.</string>
+	<string name="notify_login_ongoing_title">GIA-WiFi Autologin</string>
 	<string name="notify_login_ongoing_text_determine_requirement">Determining if login is required...</string>
 	<string name="notify_login_ongoing_text_logging_in">Logging in...</string>
-	<string name="notify_login_error_title">Unable to login to MU-WiFi</string>
+	<string name="notify_login_error_title">Unable to login to GIA-WiFi</string>
 	<string name="notify_login_error_text">Click to retry.</string>
 	<string name="notify_login_error_invalid_credentials_text">Invalid username or password.</string>
 </resources>

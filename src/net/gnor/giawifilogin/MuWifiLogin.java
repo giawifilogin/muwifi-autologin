@@ -1,7 +1,8 @@
-package org.dyndns.pawitp.muwifiautologin;
+package net.gnor.giawifilogin;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
+import net.gnor.giawifilogin.R;
 
 import android.app.IntentService;
 import android.app.Notification;

@@ -1,4 +1,4 @@
-package org.dyndns.pawitp.muwifiautologin;
+package net.gnor.giawifilogin;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -12,7 +12,7 @@ import android.util.Log;
 public class NetworkStateChanged extends BroadcastReceiver {
 
 	static final String TAG = "NetworkStateChanged";
-	static final String SSID = "MU-WiFi";
+	static final String SSID = "Guest";
 	
 	@Override
 	public void onReceive(Context context, Intent intent) {

@@ -1,8 +1,9 @@
-package org.dyndns.pawitp.muwifiautologin;
+package net.gnor.giawifilogin;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import net.gnor.giawifilogin.R;
 
 import android.content.Context;
 import android.content.Intent;
@@ -37,9 +38,9 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
 	static final String LANGUAGE_DEFAULT = "default";
 	static final String MARKET_PREFIX = "market://details?id=";
 	static final String EMAIL_TYPE = "message/rfc822";
-	static final String EMAIL_AUTHOR = "p.pawit@gmail.com";
-	static final String EMAIL_SUBJECT = "[MU-WiFi Autologin] ";
-	static final String WEBSITE_URL = "http://pawitp.dats.us/muwifi-autologin/";
+	static final String EMAIL_AUTHOR = "giawifilogin@gmail.com";
+	static final String EMAIL_SUBJECT = "[GIA-WiFi Autologin] ";
+	static final String WEBSITE_URL = "";
 	
     /** Called when the activity is first created. */
     @Override
@@ -78,16 +79,6 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
 				Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(MARKET_PREFIX + getPackageName()));
-		        startActivity(i);
-				return true;
-			}
-		});
-		
-		// Visit website callback
-		findPreference(KEY_WEBSITE).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(WEBSITE_URL));
 		        startActivity(i);
 				return true;
 			}

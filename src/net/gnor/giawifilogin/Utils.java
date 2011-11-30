@@ -1,4 +1,4 @@
-package org.dyndns.pawitp.muwifiautologin;
+package net.gnor.giawifilogin;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
